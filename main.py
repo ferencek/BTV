@@ -9,7 +9,7 @@ if __name__ == '__main__':
   # # Part with remote files
   # file_tool.save_logical_file_names_all_samples_remotely()
   # file_tool.check_missing_files_all_samples_remotely()
- 
+
   # Part with local files
   # file_tool.save_logical_file_names_all_samples_locally()
   # file_tool.copy_files_all_samples_locally()
@@ -19,7 +19,7 @@ if __name__ == '__main__':
   # histogram_tool = utility.HistogramTool(config)
   # histogram_tool.make_and_send_jobs()
 
-  # ------------------------ Step 3 - Merge histograms -----------------------------------------
-  merge_tool = utility.MergeTool(config)
-  merge_tool.merge_histograms()
-  merge_tool.merge_datasets()
+  # # ------------------------ Step 3 - Merge histograms -----------------------------------------
+  # merge_tool = utility.MergeTool(config)
+  # merge_tool.merge_histograms()
+  # merge_tool.merge_datasets()
