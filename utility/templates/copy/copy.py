@@ -31,4 +31,3 @@ if __name__ == '__main__':
   source      = '<source>'
 
   copy( destination, source)
-  

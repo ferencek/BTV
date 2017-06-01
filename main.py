@@ -19,7 +19,7 @@ if __name__ == '__main__':
   # histogram_tool = utility.HistogramTool(config)
   # histogram_tool.make_and_send_jobs()
 
-  # # ------------------------ Step 3 - Merge histograms -----------------------------------------
-  # merge_tool = utility.MergeTool(config)
-  # merge_tool.merge_histograms()
-  # merge_tool.merge_datasets()
+  # ------------------------ Step 3 - Merge histograms -----------------------------------------
+  merge_tool = utility.MergeTool(config)
+  merge_tool.merge_histograms()
+  merge_tool.merge_datasets()

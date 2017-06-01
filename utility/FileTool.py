@@ -328,11 +328,17 @@ class FileTool(object):
 
             if os.path.exists(_f):
 
-              if utility.check_root_file(_f):
-                utility.Print('status', 'File OK {0}'.format(_f))
-              else:
+              try:
+
+                if utility.check_root_file(_f):
+                  utility.Print('status', 'File OK {0}'.format(_f))
+                else:
+                  utility.Print('error', 'Error with {0} Removing ...'.format(_f))
+                  sp.check_output(['rm', _f])
+
+              except Exception, e:
                 utility.Print('error', 'Error with {0} Removing ...'.format(_f))
-                # sp.check_output('rm -f', _f)
+                sp.check_output(['rm', _f])
 
           _file_missing.close()
 

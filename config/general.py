@@ -4,19 +4,22 @@ campaign        = 'test' # 'remote' #
 # Choose True if you want to overwrite already existing files/results
 force_all       = False
 # If True all files are copied locally and used, else use files from original location
-work_locally    = False
+work_locally    = True
+
 # -------- Merge options -----------
 # Luminosity
 luminosity      = 16578
+# Name of the analyzer
 analyzer_module = 'btagval'
 # Groups for histogram merging
 groups          = ['DATA', 'QCD']
+final_file      = 'Final_DoubleMuonTaggedFatJets_MuonEnrichedJets_dataWithMCJP_histograms_btagval.root'
 
 # -------- Batch options -----------
 # Choose if you want to use batch: False, condor, lxbatch
 batch_type      = 'condor'
 # Number of jobs per sample: -1 = all, x = some arbitrary number
-number_of_jobs  = -1
+number_of_jobs  = 200
 # Number of files per job
 number_of_files = 1
 # Send jobs switch

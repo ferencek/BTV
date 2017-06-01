@@ -45,6 +45,7 @@ class MergeTool(object):
     self.number_of_files          = configuration.general.number_of_files
     self.analyzer_module          = configuration.general.analyzer_module
     self.groups                   = configuration.general.groups
+    self.final_file               = configuration.general.final_file
 
   def merge_histograms(self):
 
@@ -97,7 +98,7 @@ class MergeTool(object):
     utility.Print('python_info', '\nCalled merge_datasets function.')
 
     # Make root file with merged histograms
-    _final = ROOT.TFile.Open( os.path.join( self.path_plots_final, '_final.root'), 'recreate') 
+    _final = ROOT.TFile.Open( os.path.join( self.path_plots_final, self.final_file), 'recreate') 
 
     # Loop over groups
     for _g in self.groups:
@@ -130,7 +131,7 @@ class MergeTool(object):
           
           # Setup sample normalization
           if self.samples_info[_s]['type'] == 'MC':
-            _scale = float(self.samples_info[_s]['xs'][_n])*self.luminosity/_n_events_all
+            _scale = float(self.samples_info[_s]['xs'][_n]*self.luminosity/_n_events_all)
           else:
             _scale = 1.
 
@@ -162,4 +163,4 @@ class MergeTool(object):
 
     _final.Close()
 
-    utility.Print('status', 'Final histograms saved in {0}'.format( os.path.join( self.path_plots_final, '_final.root')))
+    utility.Print('status', 'Final histograms saved in {0}'.format( os.path.join( self.path_plots_final, self.final_file)))

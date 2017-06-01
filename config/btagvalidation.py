@@ -10,11 +10,11 @@ def string(txt):
 
 parameters = {
   'outFilename'               : string(''),             # Output file name
-  'maxEvents'                 : 1,
+  'maxEvents'                 : -1,
   'reportEvery'               : 1000,                   # Report every N events (default is N=1000)
   'DEBUG'                     : True,                   # Display debugging statements
   'DEBUGlevel'                : 0,                      # Debugging statements level
-  'triggerSelection'          : string('HLT_BTagMu_AK8Jet300_Mu5,HLT_BTagMu_Jet300_Mu5'), # Trigger selection
+  'triggerSelection'          : string( ','.join(['HLT_BTagMu_AK8Jet300_Mu5' + "'", "'" + 'HLT_BTagMu_Jet300_Mu5'])), # Trigger selection
   'useJetProbaTree'           : True,                   # Use jet probability tree
   'applyFatJetMuonTagging'    : True,                  # Apply muon tagging to fat jets (require 1 muon in fatjet)
   'applyFatJetMuonTaggingV2'  : False,                  # Apply muon tagging to fat jets (require at least 1 muon in a subjet)
