@@ -54,16 +54,21 @@ def check_root_file(file_name):
 
     if os.path.isfile(file_name):
 
-      f = ROOT.TFile.Open(file_name,'read')
+      try:
 
-      if (not f) or f.GetNkeys() == 0 or f.TestBit(ROOT.TFile.kRecovered) or f.IsZombie():
-          
+        f = ROOT.TFile.Open(file_name,'read')
+
+        if (not f) or f.GetNkeys() == 0 or f.TestBit(ROOT.TFile.kRecovered) or f.IsZombie():
+            
+          _status = False
+
+        else:
+          _status = True
+
+        f.Close()
+
+      except Exception, e:
         _status = False
-
-      else:
-        _status = True
-
-      f.Close()
 
       if _status == False:
         utility.Print('error','ROOT file {0} is not ok.'.format(file_name))

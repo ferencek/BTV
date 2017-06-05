@@ -48,10 +48,10 @@ class BatchTool(object):
     if self.batch == 'condor':
       _txt      = self.arguments['<path_batch_file_wo_ext>'] + '.txt'
       _command  = ['condor_submit', _txt]
-      utility.Print('status','{0}'.format(' '.join(_command)))
+      utility.Print('python_info','{0}'.format(' '.join(_command)))
       sp.call(' '.join(_command), shell=True)
     
     elif self.batch == 'lxbatch':
       _command  = ['bsub', '-q', self.queue, '-J', self.arguments['<path_batch_file_wo_ext>'], '<', _sh]
-      utility.Print('status','{0}'.format(' '.join(_command)))
+      utility.Print('python_info','{0}'.format(' '.join(_command)))
       sp.call( ' '.join(_command), shell=True)

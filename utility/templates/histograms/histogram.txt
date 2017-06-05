@@ -3,4 +3,5 @@ universe    =  vanilla
 log         =  <path_batch_file_wo_ext>.log
 initialdir  =  <path_batch>
 getenv      =  True
++JobFlavour = "workday"
 queue
