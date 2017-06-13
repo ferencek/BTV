@@ -118,7 +118,7 @@ class FileTool(object):
                               utility.filter_keywords( _ll, self.search_keywords['all'], self.search_keywords['any'] + _keywords_any, self.search_keywords['none'])]
 
           # Group files according to subsample and save them in separate files
-          _remote_lfns = { _ss : filter(lambda x: _ss in x, _remote_lfns) for _ss in self.samples_info[_s]['subsample'].values()}
+          _remote_lfns = { _ss : filter(lambda x: '/' + _ss + '/' in x, _remote_lfns) for _ss in self.samples_info[_s]['subsample'].values()}
 
           # Save into files
           for _ss, _r in _remote_lfns.iteritems():
@@ -181,7 +181,7 @@ class FileTool(object):
 
             # Save the result to a file
             with open(_file_missing, 'w') as _ff:
-              _ff.write('\n'.join(_numbers_missing))
+              _ff.write('\n'.join( map(str,_numbers_missing)))
 
             utility.Print('analysis_info', 'Result saved in file {0}'.format( _file_missing))
 
@@ -341,5 +341,3 @@ class FileTool(object):
                 sp.check_output(['rm', _f])
 
           _file_missing.close()
-
-

@@ -16,10 +16,10 @@ parameters = {
   'DEBUGlevel'                : 0,                      # Debugging statements level
   'triggerSelection'          : string( ','.join(['HLT_BTagMu_AK8Jet300_Mu5' + "'", "'" + 'HLT_BTagMu_Jet300_Mu5'])), # Trigger selection
   'useJetProbaTree'           : True,                   # Use jet probability tree
-  'applyFatJetMuonTagging'    : True,                  # Apply muon tagging to fat jets (require 1 muon in fatjet)
+  'applyFatJetMuonTagging'    : True,                   # Apply muon tagging to fat jets (require 1 muon in fatjet)
   'applyFatJetMuonTaggingV2'  : False,                  # Apply muon tagging to fat jets (require at least 1 muon in a subjet)
   'applyFatJetBTagging'       : False,                  # Apply b tagging to fat jets
-  'fatJetDoubleTagging'       : True,                  # Require fat jets to be double-tagged
+  'fatJetDoubleTagging'       : True,                   # Require fat jets to be double-tagged
   'fatJetDoubleBTagging'      : False,                  # Require fat jets to be double-b-tagged
   'fatJetDoubleSVBTagging'    : False,                  # Require fat jets to be double-SV-b-tagged
   'usePrunedSubjets'          : False,                  # Process pruned subjets

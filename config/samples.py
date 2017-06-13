@@ -1,6 +1,6 @@
 # List of samples used for each campaign, campaign defined in general.py
 campaign        = {
-  'test'    : ['all'],
+  'test'   : ['all'],
 }
 
 info = {
@@ -41,8 +41,8 @@ info = {
     'group'   : 'QCD',
     'subsample' : {
       '0' : 'QCD_Pt_170-300_MuEnriched_mcJPcalib_12616_v4_full',
-      '1' : 'QCD_Pt_170-300_MuEnriched_mcJPcalib_12616_ext1_v4_full',
-      '2' : 'QCD_Pt_170-300_MuEnriched_mcJPcalib_12616_ext2_v4_full',
+      '1' : 'QCD_Pt_170-300_MuEnriched_mcJPcalib_12616_backup_v4',
+      '2' : 'QCD_Pt_170-300_MuEnriched_mcJPcalib_12616_ext1_v4',
     },
     'xs':{
       '0' : 8654.49315,
@@ -58,12 +58,12 @@ info = {
     'subsample' : {
       '0' : 'QCD_Pt_300-470_MuEnriched_mcJPcalib_12616_v4_full',
       '1' : 'QCD_Pt_300-470_MuEnriched_mcJPcalib_12616_ext1_v4_full',
-      '2' : 'QCD_Pt_300-470_MuEnriched_mcJPcalib_12616_backup_v4_full',
+      '2' : 'QCD_Pt_300-470_MuEnriched_mcJPcalib_12616_ext2_v4_full',
     },
     'xs':{
-      '0' : 79.02553776,
-      '1' : 79.02553776,
-      '2' : 79.02553776,
+      '0' : 797.3526900,
+      '1' : 797.3526900,
+      '2' : 797.3526900,
     },
     # --- btagvalidation_cfg ---
     'btagvalidation_cfg': {
@@ -123,7 +123,7 @@ info = {
     'group'   : 'QCD',
     'subsample' : {
       '0' : 'QCD_Pt_1000-Inf_MuEnriched_mcJPcalib_12616_v4_full',
-      '1' : 'QCD_Pt_1000-Inf_MuEnriched_mcJPcalib_12616_ext1_v4_full',
+      '1' : 'QCD_Pt_1000-Inf_MuEnriched_mcJPcalib_12616_v4_full_ext1',
     },
     'xs':{
       '0' : 1.621316920,
