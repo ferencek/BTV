@@ -28,6 +28,8 @@ git clone -b boostedbb_SFComm_80x_cleanUp_04112017 git://github.com/cms-btv-pog/
 
 scram b -j8 (-j6 instead)
 
+cd RecoBTag/BTagValidation
+
 git clone https://github.com/BenjaminMesic/BTV.git
 
 To be done: Details
