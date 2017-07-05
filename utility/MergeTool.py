@@ -159,7 +159,7 @@ class MergeTool(object):
       #Write histograms part
       _final.cd()
       for _h in sorted(_final_histograms.keys()):
-        _final_histograms[_h].Write()      
+        _final_histograms[_h].Write()
 
     _final.Close()
 

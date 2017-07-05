@@ -20,15 +20,15 @@ class FileTool(object):
     self.path_main                = configuration.paths.main
     self.path_samples             = utility.make_directory( configuration.paths.samples)
     self.path_logical_file_names  = utility.make_directory( configuration.paths.logical_file_names)
-    self.path_batch_results       = utility.make_directory( configuration.paths.batch_results, self.campaign, 'copy')
-    self.path_batch_templates     = utility.make_directory( configuration.paths.batch_templates, 'copy')
+    self.path_batch_results       = utility.make_directory( configuration.paths.batch_results, self.campaign)
+    self.path_batch_templates     = utility.make_directory( configuration.paths.batch_templates)
     self.path_proxy               = configuration.paths.proxy
 
     # ------ Batch options -------
     self.batch_type               = configuration.general.batch_type
     self.number_of_jobs           = configuration.general.number_of_jobs
     self.send_jobs                = configuration.general.send_jobs
-    self.batch_templates          = configuration.general.batch_templates['copy']
+    self.batch_templates          = configuration.general.batch_templates
 
     # ------ Samples -------
     self.samples                  = configuration.samples.campaign[self.campaign]
@@ -175,13 +175,14 @@ class FileTool(object):
             else:
               # check if any file is missing in the sequence
               _numbers_missing = list(set(range( _numbers[0], _numbers[-1] + 1)) - set(_numbers))
+              _numbers_missing = map(str, _numbers_missing)
 
             if not len(_numbers_missing) == 0:
-              utility.Print('error', 'Missing files {0}'.format(','.join(map(str, _numbers_missing))))
+              utility.Print('error', 'Missing files {0}'.format(','.join( _numbers_missing )))
 
             # Save the result to a file
             with open(_file_missing, 'w') as _ff:
-              _ff.write('\n'.join( map(str,_numbers_missing)))
+              _ff.write('\n'.join( _numbers_missing))
 
             utility.Print('analysis_info', 'Result saved in file {0}'.format( _file_missing))
 
@@ -242,6 +243,10 @@ class FileTool(object):
 
     utility.Print('python_info', '\nCalled copy_files_all_samples_locally function.')
 
+    _batch_templates_copy      = self.batch_templates['copy']
+    _path_batch_results_copy   = utility.make_directory( self.path_batch_results, 'copy')
+    _path_batch_templates_copy = utility.make_directory( self.path_batch_templates, 'copy')
+
     # Loop over samples
     for _s in self.samples:
 
@@ -275,7 +280,7 @@ class FileTool(object):
             _source                   = _f.replace( self.path_samples, _path_remote_samples)               # place from where to copy
             _destination              = '/'.join(_x[:-1])                                                  # path where to copy
             _batch_file_wo_ext        = _x[-1].replace('.root','')                                         # file name without any extension
-            _path_batch               = _destination.replace( self.path_samples, self.path_batch_results)  # path to newly created batch script
+            _path_batch               = _destination.replace( self.path_samples,  _path_batch_results_copy)# path to newly created batch script
             _path_batch_file_wo_ext   = os.path.join( _path_batch, _batch_file_wo_ext)                     # path and name of the script without any extension
             _protocol                 = self.remote_locations['protocol'][_l]                              # protocol used for copying
             _path_proxy               = self.path_proxy                                                    # one needs proxy file to give permission to condor
@@ -294,7 +299,7 @@ class FileTool(object):
             }
 
             # Create batch tool instance
-            _batch = utility.BatchTool( self.path_batch_templates, self.batch_templates, _batch_arguments, self.batch_type)
+            _batch = utility.BatchTool( _path_batch_templates_copy, _batch_templates_copy, _batch_arguments, self.batch_type)
             # Make scripts first
             _batch.make_scripts()
             # Send jobs
@@ -307,6 +312,10 @@ class FileTool(object):
     ''' Loop over missing file and remove any file which exists and it has error.'''
 
     utility.Print('python_info', '\nCalled check_missing_files_all_samples_locally function.')
+
+    _batch_templates_check     = self.batch_templates['check']
+    _path_batch_results_check  = utility.make_directory( self.path_batch_results, 'check')
+    _path_batch_templates_check= utility.make_directory( self.path_batch_templates, 'check')
 
     # Loop over samples
     for _s in self.samples:
@@ -326,18 +335,42 @@ class FileTool(object):
 
             _f = _f.rstrip()
 
-            if os.path.exists(_f):
+            # Send check files on batch
+            if self.send_jobs:
 
-              try:
+              _x                        = _f.split('/')                                                      # split input file into chunks wrt to '/'
+              _batch_file_wo_ext        = _x[-1].replace('.root','')                                         # file name without any extension
+              _destination              = '/'.join(_x[:-1]) 
+              _path_batch               = _destination.replace( self.path_samples, _path_batch_results_check)# path to newly created batch script
+              _path_batch_file_wo_ext   = os.path.join( _path_batch, _batch_file_wo_ext)                     # path and name of the script without any extension
+              _path_proxy               = self.path_proxy                                                    # one needs proxy file to give permission to condor
+              _file_proxy               = self.path_proxy.split('/')[-1]
+
+              _batch_arguments = {
+                '<path_batch>'            : _path_batch,
+                '<path_batch_file_wo_ext>': _path_batch_file_wo_ext,
+                '<file_name>'             : _f,
+                '<X509_USER_PROXY_path>'  : _path_proxy,
+                '<X509_USER_PROXY_file>'  : _file_proxy,
+                '<SCRAM_ARCH>'            : os.environ['SCRAM_ARCH'],
+                '<CMSSW_dir>'             : os.path.join( os.environ['CMSSW_BASE'], 'src'),
+              }
+
+              # Create batch tool instance
+              _batch = utility.BatchTool( _path_batch_templates_check, _batch_templates_check, _batch_arguments, self.batch_type)
+              # Make scripts first
+              _batch.make_scripts()
+              # Send job
+              _batch.send_job()
+
+            else:
+
+              if os.path.isfile(_f):
 
                 if utility.check_root_file(_f):
                   utility.Print('status', 'File OK {0}'.format(_f))
                 else:
-                  utility.Print('error', 'Error with {0} Removing ...'.format(_f))
+                  utility.Print('error', 'Error with {0}. Removing ...'.format(_f))
                   sp.check_output(['rm', _f])
-
-              except Exception, e:
-                utility.Print('error', 'Error with {0} Removing ...'.format(_f))
-                sp.check_output(['rm', _f])
 
           _file_missing.close()
