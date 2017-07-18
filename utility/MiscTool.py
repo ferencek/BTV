@@ -36,11 +36,11 @@ def make_directory(*directory):
 def filter_keywords(file_name, filter_keywords_all, filter_keywords_any, filter_keywords_none):
   '''  Filter files which have the keywords '''
 
-  if not all(_k in file_name for _k in filter_keywords_all):
+  if not all(_k in file_name for _k in filter_keywords_all) and len(filter_keywords_all):
     return False
-  elif not any(_k in file_name for _k in filter_keywords_any):
+  elif not any(_k in file_name for _k in filter_keywords_any) and len(filter_keywords_any):
     return False
-  elif any(_k in file_name for _k in filter_keywords_none):
+  elif any(_k in file_name for _k in filter_keywords_none) and len(filter_keywords_none):
     return False
   else:
     return True
