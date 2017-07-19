@@ -51,5 +51,5 @@ remote_locations = {
 search_keywords = {
   'all' : ['.root'],
   'any' : [],
-  'none': ['failed', '161222_224802', '161222_224636']
+  'none': ['failed', '161222_224802', '161222_224636', 'SlimmedTrees']
 }
