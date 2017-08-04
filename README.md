@@ -5,10 +5,13 @@ Instructions:
 
 
 cmsrel CMSSW_9_2_7_patch1
+
 cd CMSSW_9_2_7_patch1/src
+
 cmsenv
 
 setenv CMSSW_GIT_REFERENCE /cvmfs/cms.cern.ch/cmssw.git.daily
+
 git cms-init
 
 git remote add btv-cmssw https://github.com/cms-btv-pog/cmssw.git
