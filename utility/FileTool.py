@@ -49,6 +49,9 @@ class FileTool(object):
     _command = ['gfal-ls', '-l'] #,'-Hl']
     _command.append(protocol + location)
 
+    # _command = ['lcg-ls -b -D -Hl srmv2'] #,'-Hl']
+    # _command.append('"' + protocol + location + '"')
+
     utility.Print('python_info', 'Command: ' + ' '.join(_command))
 
     return sp.check_output(_command)

@@ -1,25 +1,53 @@
-import config
 import utility
 
 if __name__ == '__main__':
 
-  # # ------------------------ Step 1 - Locate all the samples and their files -----------------------
-  # file_tool = utility.FileTool(config)
- 
-  # # Part with remote files
-  # file_tool.save_logical_file_names_all_samples_remotely()
-  # file_tool.check_missing_files_all_samples_remotely()
+  # List of all the campaings you want to create, their location is config/<campaign_name>
+  # NOTE: once created, change each campaign config manually since they are copied from 
+  # templates in utility/templates/config
+  campaigns       = ['test']
 
-  # Part with local files
-  # file_tool.save_logical_file_names_all_samples_locally()
-  # file_tool.copy_files_all_samples_locally()
-  # file_tool.check_missing_files_all_samples_locally()
+  # Part which setups campaigns
+  utility.setup_campaigns( campaigns, __file__)
 
-  # # ------------ Step 2 - Create histograms by making jobs and sending them to batch ------------
-  # histogram_tool = utility.HistogramTool(config)
-  # histogram_tool.make_and_send_jobs()
+  # Choose which job you want to execute
+  job = int(utility.setup_job())
 
-  # # ------------------------ Step 3 - Merge histograms -----------------------------------------
-  # merge_tool = utility.MergeTool(config)
-  # merge_tool.merge_histograms()
-  # merge_tool.merge_datasets()
+  # Loop over campaigns
+  for _n, _c in enumerate(campaigns):
+
+    utility.Print('status', '\nWorking on campaign {0}'.format(_c))
+
+    config = getattr(__import__('config', fromlist=[_c]), _c)
+
+    # Initalize handlers for each step
+    file_tool       = utility.FileTool(config)
+    histogram_tool  = utility.HistogramTool(config)
+    merge_tool      = utility.MergeTool(config)
+  
+    if job == 1:
+      file_tool.save_logical_file_names_all_samples_remotely()
+
+    elif job == 2:
+      file_tool.check_missing_files_all_samples_remotely()
+
+    elif job == 3:
+      file_tool.save_logical_file_names_all_samples_locally()
+
+    elif job == 4: 
+      file_tool.copy_files_all_samples_locally()
+
+    elif job == 5:
+      file_tool.check_missing_files_all_samples_locally()
+
+    elif job == 6:
+      histogram_tool.make_and_send_jobs()
+
+    elif job == 7:
+      merge_tool.merge_histograms()
+
+    elif job == 8:
+      merge_tool.merge_datasets()
+    
+    else:
+      pass
