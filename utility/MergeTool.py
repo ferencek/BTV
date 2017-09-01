@@ -173,4 +173,4 @@ class MergeTool(object):
 
       _final.Close()
 
-      utility.Print('status', 'Final histograms saved in {0}'.format( os.path.join( self.path_plots_final, self.final_file)))
+      utility.Print('status', 'Final histograms saved in {0}'.format( os.path.join( self.path_plots_final, self.campaigns_info[_c]['final_output'])))
