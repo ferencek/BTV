@@ -127,7 +127,11 @@ process.btagval = cms.EDAnalyzer('BTagValidation',
     jecUncPayloadName               = cms.string(<jecUncPayloadName>), 
     doNewJEC                        = cms.bool(<doNewJEC>),
     doJECUncert                     = cms.bool(<doJECUncert>),  
-    File_BFrag                      = cms.string(<FileBFrag>), 
+    File_BFrag                      = cms.string(<FileBFrag>),
+    produceDoubleBSFtemplates       = cms.bool(<produceDoubleBSFtemplates>),
+    useRunRange                     = cms.bool(<useRunRange>),
+    runRangeMin                     = cms.int32(<runRangeMin>),
+    runRangeMax                     = cms.int32(<runRangeMax>)
 )
 
 # process.btagvalsubjetmu = process.btagval.clone(

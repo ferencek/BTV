@@ -109,5 +109,9 @@ parameters = {
   'HistMassSoftDropWt'        : string('massSoftDropweight_mc_data'),
   'FileJetNTracksWt'          : string('jetNTracks_Hbb_QCDbb_pt425_weight.root'),
   'jetNTracksweight_mc_data'  : string('jetNTracksweight_mc_data'),
-  'triggerLogicIsOR'          : True
+  'triggerLogicIsOR'          : True,
+  'produceDoubleBSFtemplates' : False,
+  'useRunRange'               : False,
+  'runRangeMin'               : 0,
+  'runRangeMax'               : 999999
 }

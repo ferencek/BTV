@@ -1,8 +1,8 @@
 # main.py location, everything is defined with respect to it
 main                = '/'.join(__file__.split('/')[:-2])
 # If not really necessary don't change
-samples             = '/STORE/benjamin/17_08_BTV_2017_data/samples'                     # '/'.join([ main, 'samples'])                                      # 
-logical_file_names  = '/STORE/benjamin/17_08_BTV_2017_data/samples/logical_file_names'  # '/'.join([ main, 'samples', 'logical_file_names'])                # 
+samples             = '/'.join([ main, 'samples'])                                      # '/STORE/benjamin/17_08_BTV_2017_data/samples'                     # 
+logical_file_names  = '/'.join([ main, 'samples', 'logical_file_names'])                # '/STORE/benjamin/17_08_BTV_2017_data/samples/logical_file_names'  # 
 histograms          = '/'.join([ main, 'results', 'histograms'])
 plots_final         = '/'.join([ main, 'results', 'plots_final'])
 batch_results       = '/'.join([ main, 'results', 'batch'])
