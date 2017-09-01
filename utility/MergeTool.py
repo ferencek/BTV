@@ -15,7 +15,8 @@ class MergeTool(object):
     utility.Print('python_info', '\nCreated instance of MergeHandler class')
 
     # Get campaign name
-    self.campaign                 = configuration.general.campaign
+    self.campaigns                 = configuration.general.campaigns
+    self.campaigns_info            = configuration.campaigns.info
 
     # Force all regardless of already existing files
     self.force_all                = configuration.general.force_all
@@ -26,16 +27,12 @@ class MergeTool(object):
     # ------ Paths -------
     self.path_main                = configuration.paths.main
     self.path_logical_file_names  = configuration.paths.logical_file_names
-    self.path_batch_results       = utility.make_directory( configuration.paths.batch_results, self.campaign, 'histograms')
-    self.path_histograms          = utility.make_directory( configuration.paths.histograms, self.campaign)
+    self.path_histograms          = utility.make_directory( configuration.paths.histograms)
     self.path_samples             = configuration.paths.samples
-    self.path_plots_final         = utility.make_directory( configuration.paths.plots_final, self.campaign)
+    self.path_plots_final         = utility.make_directory( configuration.paths.plots_final)
 
     # ------ Samples -------
-    self.samples                  = configuration.samples.campaign[self.campaign]
     self.samples_info             = configuration.samples.info
-    if self.samples[0] == 'all':
-      self.samples = sorted(self.samples_info.keys())
 
     # ------ Browsing options -------
     self.remote_locations         = configuration.general.remote_locations
@@ -45,40 +42,46 @@ class MergeTool(object):
     self.number_of_files          = configuration.general.number_of_files
     self.analyzer_module          = configuration.general.analyzer_module
     self.groups                   = configuration.general.groups
-    self.final_file               = configuration.general.final_file
 
   def merge_histograms(self):
 
     utility.Print('python_info', '\nCalled merge_histograms function.')
 
-    # Loop over samples
-    for _s in self.samples:
+    # Main loop over list of campaigns which are defined in general.py
+    for _c in self.campaigns:
+      
+      _path_histograms = os.path.join( self.path_histograms, _c)
 
-      # Loop over all remote locations
-      for _l in self.remote_locations['path']:
+      # Loop over samples
+      for _s in self.campaigns_info[_c]['samples']:
 
-        # Loop over all subsamples
-        for _ss in self.samples_info[_s]['subsample'].values():
+        # Loop over all remote locations
+        for _l in self.remote_locations['path']:
 
-          utility.Print('status', '\nSample: {0}, {1}, {2}'.format(_s, _l, _ss))
+          # Loop over all subsamples
+          for _ss in self.campaigns_info[_c]['samples'][_s]:
 
-          if self.work_locally:
-            _location = 'local'
-          else:
-            _location = 'remote'
+            _subsample = self.samples_info[_s]['subsample'][_ss].replace('/', '__')
 
-          # Using this procedure since we've used it before to group files for each histogram
-          _file = os.path.join( self.path_logical_file_names, _location, _l, _s, _ss + '.txt')         
-          with open( _file, 'r') as _f:
-            _f          = _f.readlines()
-            _histograms = [ _f[_i].replace( self.path_samples, self.path_histograms).replace( self.remote_locations['path'][_l], self.path_histograms).replace( self.remote_locations['storage_element'][_l], '').rstrip()
-                            for _i in xrange(0, len(_f), self.number_of_files) ]
+            utility.Print('status', '\nSample: {0}, {1}, {2}'.format(_s, _l, _subsample))
+
+            if self.work_locally:
+              _location = 'local'
+            else:
+              _location = 'remote'
+
+            # Using this procedure since we've used it before to group files for each histogram
+            _file = os.path.join( self.path_logical_file_names, _location, _l, _s, _subsample + '.txt')         
+            with open( _file, 'r') as _f:
+              _f          = _f.readlines()
+              _histograms = [ _f[_i].replace( self.path_samples, _path_histograms).replace( self.remote_locations['path'][_l], _path_histograms).replace( self.remote_locations['storage_element'][_l], '').rstrip()
+                              for _i in xrange(0, len(_f), self.number_of_files) ]
 
           # Check if histogram exists
           _histograms = [ _h for _h in _histograms if utility.check_root_file( _h)] 
 
           # Create root file for merging
-          _file_merge   =  os.path.join( self.path_histograms, _ss + '.root' )
+          _file_merge   =  os.path.join( _path_histograms, _subsample + '.root' )
 
           if not len(_histograms):
              utility.Print('error', 'No input histograms')           
@@ -97,70 +100,77 @@ class MergeTool(object):
 
     utility.Print('python_info', '\nCalled merge_datasets function.')
 
-    # Make root file with merged histograms
-    _final = ROOT.TFile.Open( os.path.join( self.path_plots_final, self.final_file), 'recreate') 
+    # Main loop over list of campaigns which are defined in general.py
+    for _c in self.campaigns:
 
-    # Loop over groups
-    for _g in self.groups:
+      _path_histograms    = os.path.join( self.path_histograms, _c)
 
-      _final_histograms = {}
+      # Make root file with merged histograms
+      _final = ROOT.TFile.Open( os.path.join( self.path_plots_final, self.campaigns_info[_c]['final_output']), 'recreate') 
 
-      utility.Print('status', '\nGroup: {0}'.format(_g))
+      # Loop over groups
+      for _g in self.groups:
 
-      # Loop over samples
-      for _s in self.samples:
+        _final_histograms = {}
 
-        # Loop over all subsamples
-        for _n, _ss in self.samples_info[_s]['subsample'].iteritems():
+        utility.Print('status', '\nGroup: {0}'.format(_g))
 
-          # Check if subsample in the current group
-          if not self.samples_info[_s]['group'] == _g:
-            continue
+        # Loop over samples
+        for _s in self.campaigns_info[_c]['samples']:
 
-          _input_file = os.path.join( self.path_histograms, _ss + '.root' )
+          # Loop over all subsamples
+          for _ss in self.campaigns_info[_c]['samples'][_s]:
 
-          if not utility.check_root_file( _input_file):
-            continue
+            _subsample = self.samples_info[_s]['subsample'][_ss].replace('/', '__')
 
-          utility.Print('status', 'Sample: {0}'.format(_ss))
-    
-          _input_file = ROOT.TFile.Open( _input_file, 'read')
+            # Check if subsample in the current group
+            if not self.samples_info[_s]['group'] == _g:
+              continue
 
-          _htemp          = _input_file.Get( os.path.join( self.analyzer_module,'h1_CutFlow_unw'))
-          _n_events_all   = _htemp.GetBinContent(1)
-          
-          # Setup sample normalization
-          if self.samples_info[_s]['type'] == 'MC':
-            _scale = float(self.samples_info[_s]['xs'][_n]*self.luminosity/_n_events_all)
-          else:
-            _scale = 1.
+            _input_file = os.path.join( _path_histograms, _subsample + '.root' )
 
-          # get the number of histograms
-          _n_histograms = _input_file.Get( self.analyzer_module).GetListOfKeys().GetEntries()
+            if not utility.check_root_file( _input_file):
+              continue
 
-          # Loop over all histograms
-          for _h in xrange(_n_histograms):
+            utility.Print('status', 'Sample: {0}'.format(_subsample))
+      
+            _input_file = ROOT.TFile.Open( _input_file, 'read')
 
-            _histogram_name = _input_file.Get( self.analyzer_module).GetListOfKeys()[_h].GetName()
-            _htemp          = _input_file.Get( os.path.join( self.analyzer_module, _histogram_name) )
-
-            if _histogram_name not in _final_histograms.keys():
-              _final_histograms[_histogram_name] = copy.deepcopy( _htemp)
-              _final_histograms[_histogram_name].SetName(_g + '__' + _histogram_name)
-              _final_histograms[_histogram_name].Scale( _scale)
+            _htemp          = _input_file.Get( os.path.join( self.analyzer_module,'h1_CutFlow_unw'))
+            _n_events_all   = _htemp.GetBinContent(1)
+            
+            # Setup sample normalization
+            if self.samples_info[_s]['type'] == 'MC':
+              _scale = float(self.samples_info[_s]['xs'][_n]*self.luminosity/_n_events_all)
             else:
-              _final_histograms[_histogram_name].Add( _htemp, _scale)
+              _scale = 1.
 
-          utility.Print('analysis_info', 'Normalization: {0}'.format(_scale))
-          utility.Print('analysis_info', 'Number of histograms: {0}'.format(_n_histograms))
+            # get the number of histograms
+            _n_histograms = _input_file.Get( self.analyzer_module).GetListOfKeys().GetEntries()
 
-          _input_file.Close()
+            # Loop over all histograms
+            for _h in xrange(_n_histograms):
 
-      #Write histograms part
-      _final.cd()
-      for _h in sorted(_final_histograms.keys()):
-        _final_histograms[_h].Write()
+              _histogram_name = _input_file.Get( self.analyzer_module).GetListOfKeys()[_h].GetName()
+              _htemp          = _input_file.Get( os.path.join( self.analyzer_module, _histogram_name) )
 
-    _final.Close()
+              if _histogram_name not in _final_histograms.keys():
+                _final_histograms[_histogram_name] = copy.deepcopy( _htemp)
+                _final_histograms[_histogram_name].SetName(_g + '__' + _histogram_name)
+                _final_histograms[_histogram_name].Scale( _scale)
+              else:
+                _final_histograms[_histogram_name].Add( _htemp, _scale)
 
-    utility.Print('status', 'Final histograms saved in {0}'.format( os.path.join( self.path_plots_final, self.final_file)))
+            utility.Print('analysis_info', 'Normalization: {0}'.format(_scale))
+            utility.Print('analysis_info', 'Number of histograms: {0}'.format(_n_histograms))
+
+            _input_file.Close()
+
+        #Write histograms part
+        _final.cd()
+        for _h in sorted(_final_histograms.keys()):
+          _final_histograms[_h].Write()
+
+      _final.Close()
+
+      utility.Print('status', 'Final histograms saved in {0}'.format( os.path.join( self.path_plots_final, self.final_file)))

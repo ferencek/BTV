@@ -10,17 +10,11 @@ class FileTool(object):
 
     utility.Print('python_info', '\nCreated instance of FileTool class')
 
-    # Get campaign name
-    self.campaign                 = configuration.general.campaign
-
-    # Force all regardless of already existing files
-    self.force_all                = configuration.general.force_all
-
     # ------ Paths -------
     self.path_main                = configuration.paths.main
     self.path_samples             = utility.make_directory( configuration.paths.samples)
     self.path_logical_file_names  = utility.make_directory( configuration.paths.logical_file_names)
-    self.path_batch_results       = utility.make_directory( configuration.paths.batch_results, self.campaign)
+    self.path_batch_results       = utility.make_directory( configuration.paths.batch_results)
     self.path_batch_templates     = utility.make_directory( configuration.paths.batch_templates)
     self.path_proxy               = configuration.paths.proxy
 
@@ -31,10 +25,8 @@ class FileTool(object):
     self.batch_templates          = configuration.general.batch_templates
 
     # ------ Samples -------
-    self.samples                  = configuration.samples.campaign[self.campaign]
     self.samples_info             = configuration.samples.info
-    if self.samples[0] == 'all':
-      self.samples = sorted(self.samples_info.keys())
+    self.samples                  = self.samples_info.keys()
 
     # ------ Browsing options -------
     self.remote_locations         = configuration.general.remote_locations
@@ -126,7 +118,7 @@ class FileTool(object):
           # Save into files
           for _ss, _r in _remote_lfns.iteritems():
 
-            _file = os.path.join( self.path_logical_file_names, 'remote', _l, _s, _ss + '.txt')
+            _file = os.path.join( self.path_logical_file_names, 'remote', _l, _s, _ss.replace('/', '__') + '.txt')
 
             # Save to a file
             with open(_file, 'w') as _output:
@@ -153,7 +145,7 @@ class FileTool(object):
 
           utility.Print('status', '\nSample: {0}, {1}, {2}'.format(_s, _l, _ss))
 
-          _file = os.path.join( self.path_logical_file_names, 'remote', _l, _s, _ss + '.txt')
+          _file = os.path.join( self.path_logical_file_names, 'remote', _l, _s, _ss.replace('/', '__') + '.txt')
 
           if os.path.isfile(_file):
 
@@ -211,7 +203,7 @@ class FileTool(object):
 
           utility.Print('status', '\nSample: {0}, {1}, {2}'.format(_s, _l, _ss))
 
-          _file_remote        = os.path.join( self.path_logical_file_names, 'remote', _l, _s, _ss + '.txt')
+          _file_remote        = os.path.join( self.path_logical_file_names, 'remote', _l, _s, _ss.replace('/', '__') + '.txt')
           _file_local         = _file_remote.replace('remote', 'local')
           _file_local_missing = _file_local.replace('.txt', '_missing.txt')
 
@@ -261,7 +253,7 @@ class FileTool(object):
         # Loop over all subsamples
         for _ss in self.samples_info[_s]['subsample'].values():
 
-          _file_missing = os.path.join( self.path_logical_file_names, 'local', _l, _s, _ss + '_missing.txt')
+          _file_missing = os.path.join( self.path_logical_file_names, 'local', _l, _s, _ss.replace('/', '__') + '_missing.txt')
           _file_missing = open( _file_missing, 'r')
 
           for _n, _f in enumerate(_file_missing):
@@ -331,7 +323,7 @@ class FileTool(object):
         # Loop over all subsamples
         for _ss in self.samples_info[_s]['subsample'].values():
 
-          _file_missing = os.path.join( self.path_logical_file_names, 'local', _l, _s, _ss + '_missing.txt')
+          _file_missing = os.path.join( self.path_logical_file_names, 'local', _l, _s, _ss.replace('/', '__') + '_missing.txt')
           _file_missing = open( _file_missing, 'r')
 
           for _f in _file_missing:
@@ -377,3 +369,4 @@ class FileTool(object):
                   sp.check_output(['rm', _f])
 
           _file_missing.close()
+
