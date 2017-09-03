@@ -77,24 +77,24 @@ class MergeTool(object):
               _histograms = [ _f[_i].replace( self.path_samples, _path_histograms).replace( self.remote_locations['path'][_l], _path_histograms).replace( self.remote_locations['storage_element'][_l], '').rstrip()
                               for _i in xrange(0, len(_f), self.number_of_files) ]
 
-          # Check if histogram exists
-          _histograms = [ _h for _h in _histograms if utility.check_root_file( _h)] 
+            # Check if histogram exists
+            _histograms = [ _h for _h in _histograms if utility.check_root_file( _h)] 
 
-          # Create root file for merging
-          _file_merge   =  os.path.join( _path_histograms, _subsample + '.root' )
+            # Create root file for merging
+            _file_merge   =  os.path.join( _path_histograms, _subsample + '.root' )
 
-          if not len(_histograms):
-             utility.Print('error', 'No input histograms')           
-             continue
+            if not len(_histograms):
+               utility.Print('error', 'No input histograms')           
+               continue
 
-          if utility.check_root_file(_file_merge) and not self.force_all:
-            utility.Print('python_info', 'File {0} already exists.'.format(_file_merge))
-            continue
+            if utility.check_root_file(_file_merge) and not self.force_all:
+              utility.Print('python_info', 'File {0} already exists.'.format(_file_merge))
+              continue
 
-          # Merge files using hadd command
-          _command = ['hadd', '-f', _file_merge] + _histograms
-          utility.Print('status','{0}'.format(' '.join(_command)))
-          sp.check_output(_command)
+            # Merge files using hadd command
+            _command = ['hadd', '-f', _file_merge] + _histograms
+            utility.Print('status','{0}'.format(' '.join(_command)))
+            sp.check_output(_command)
 
   def merge_datasets(self):
 
@@ -102,6 +102,8 @@ class MergeTool(object):
 
     # Main loop over list of campaigns which are defined in general.py
     for _c in self.campaigns:
+
+      utility.Print('status', '\nCampaign: {0}'.format(_c))
 
       _path_histograms    = os.path.join( self.path_histograms, _c)
 
