@@ -16,6 +16,11 @@ class BatchTool(object):
     self.arguments      = arguments
     self.queue          = queue
 
+    # Add aditional layer of directories for each job
+    _new_path_batch                             = self.arguments['<path_batch_file_wo_ext>']
+    self.arguments['<path_batch_file_wo_ext>']  = _new_path_batch.replace( self.arguments['<path_batch>'], _new_path_batch)
+    self.arguments['<path_batch>']              = _new_path_batch
+
     # make batch directory
     utility.make_directory(self.arguments['<path_batch>'])
 
@@ -44,6 +49,9 @@ class BatchTool(object):
     # Change permission so that it can be executed 
     _sh = self.arguments['<path_batch_file_wo_ext>'] + '.sh'
     os.chmod(_sh, os.stat(_sh).st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+
+    # Needed so that LSF output is stored in the same directory as job itself
+    os.chdir(self.arguments['<path_batch>'])
 
     if self.batch == 'condor':
       _txt      = self.arguments['<path_batch_file_wo_ext>'] + '.txt'
