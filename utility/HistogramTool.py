@@ -123,9 +123,13 @@ class HistogramTool(object):
               _batch_arguments['<SCRAM_ARCH>']              = os.environ['SCRAM_ARCH']
               _batch_arguments['<CMSSW_dir>']               = os.path.join( os.environ['CMSSW_BASE'], 'src')
 
-              # Check if there is something to overwrite from samples.py for each sample
-              for _b in self.campaigns_info[_c]['btagvalidation_cfg']:
-                _batch_arguments['<' + _b + '>'] = self.campaigns_info[_c]['btagvalidation_cfg'][_b]
+              # Check if there is something to overwrite from campaigns.py for each sample
+              if _s in self.campaigns_info[_c]['btagvalidation_cfg']:
+
+                utility.Print('status','Overwriting configs: {0}'.format(self.campaigns_info[_c]['btagvalidation_cfg'][_s]))
+
+                for _b in self.campaigns_info[_c]['btagvalidation_cfg'][_s]:
+                  _batch_arguments['<' + _b + '>'] = self.campaigns_info[_c]['btagvalidation_cfg'][_s][_b]
 
               # Create batch tool instance
               _batch = utility.BatchTool( self.path_batch_templates, self.batch_templates, _batch_arguments, self.batch_type, self.queue_lxbatch)

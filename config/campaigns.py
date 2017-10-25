@@ -8,7 +8,11 @@ info = {
     # Name of the root final with final histograms
     'final_output'        : 'A_Final_DoubleMuonTaggedFatJets_MuonEnrichedJets_dataWithMCJP_histograms_btagval.root',
     # Dictionary of all variables that need to be changed for each campaign
-    'btagvalidation_cfg'  : {}
+    'btagvalidation_cfg'  : {
+      'BTagMu': {
+        'doJECUncert'             : True,
+      },
+    }
   },
 
   'B': {
@@ -19,7 +23,17 @@ info = {
     # Name of the root final with final histograms
     'final_output'        : 'B_Final_DoubleMuonTaggedFatJets_MuonEnrichedJets_dataWithMCJP_histograms_btagval.root',
     # Dictionary of all variables that need to be changed for each campaign
-    'btagvalidation_cfg'  : {}
-  }
+    'btagvalidation_cfg'  : {
+    }
 
+  }
 }
+
+
+def string(txt):
+  ''' str wrapper since cmsRun/python requires string to have "". '''
+  
+  ''' RECIPE: If working with special flags e.g. 
+  'triggerSelection'          : string( ','.join(['HLT_BTagMu_AK8Jet300_Mu5' + "'", "'" + 'HLT_BTagMu_Jet300_Mu5']))
+  '''
+  return txt.join(["'", "'"])
