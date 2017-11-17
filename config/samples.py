@@ -1,4 +1,29 @@
 # 2017 Campaign
+
+### Alice want just data with AK8Jet300 OR AK4Jet300, and another with just Dijet170 trigger(s).
+
+# info = {
+#   # ------------------------------------ Data ------------------------------------------ 
+#   'BTagMu':{
+#     'type'    : 'Data',
+#     'group'   : 'DATA',
+#     'subsample' : {
+#       '0' : 'BTagMu_Run2017B-23Jun2017-v1_MINIAOD',
+#       '1' : 'BTagMu_Run2017B-PromptReco-v1_MINIAOD',
+#       '2' : 'BTagMu_Run2017B-PromptReco-v2_MINIAOD',
+#       '3' : 'BTagMu_Run2017C-PromptReco-v1_MINIAOD',
+#       '4' : 'Run2017C/BTagMu/Run2017C-PromptReco-v2_9_2_X',
+#       '5' : 'Run2017C/BTagMu/Run2017C-PromptReco-v3_9_2_X',
+#       '6' : 'BTagMu_Run2017C-PromptReco-v3_MINIAOD',
+#       '7' : 'BTagMu_Run2017D-PromptReco-v1_MINIAOD',
+#     }
+#   },
+# 
+# }
+
+
+### producing Data/QCDMuEnriched 2017 v1 - ~last week of Oct 2017
+
 info = {
   # ------------------------------------ Data ------------------------------------------ 
   'BTagMu':{
@@ -11,13 +36,96 @@ info = {
       '3' : 'BTagMu_Run2017C-PromptReco-v1_MINIAOD',
       '4' : 'Run2017C/BTagMu/Run2017C-PromptReco-v2_9_2_X',
       '5' : 'Run2017C/BTagMu/Run2017C-PromptReco-v3_9_2_X',
+      '6' : 'BTagMu_Run2017C-PromptReco-v3_MINIAOD',
+      '7' : 'BTagMu_Run2017D-PromptReco-v1_MINIAOD',
     }
   },
+#   'QCD_Pt-120to170_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8':{
+#     'type'    : 'MC',
+#     'group'   : 'QCD',
+#     'subsample' : {
+#       '0' : 'QCD_Pt_120-170_MuEnriched_mcJPcalib_12616_v4_full',
+#       '1' : 'QCD_Pt_120-170_MuEnriched_mcJPcalib_12616_backup_v4_full',
+#     },
+#     'xs':{
+#       '0' : 25190.51514,
+#       '1' : 25190.51514,
+#     }
+#   },
+  'QCD_Pt-170to300_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8':{
+    'type'    : 'MC',
+    'group'   : 'QCD',
+    'subsample' : {
+      '0' : 'QCD_Pt_170-300_MuEnriched_v1_Sep19-2017',
+      '1' : 'QCD_Pt_170-300_MuEnriched_v2_Sep19-2017',
+    },
+    'xs':{
+      '0' : 8654.49315,
+      '1' : 8654.49315,
+    }
+  },
+  'QCD_Pt-300to470_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8':{
+    'type'    : 'MC',   
+    'group'   : 'QCD',
+    'subsample' : {
+      '0' : 'QCD_Pt_300-470_MuEnriched_v1_Sep19-2017',
+      '1' : 'QCD_Pt_300-470_MuEnriched_v2_Sep19-2017',
+    },
+    'xs':{
+      '0' : 797.3526900,
+      '1' : 797.3526900,
+    },
+  },
+  'QCD_Pt-470to600_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8':{
+    'type'    : 'MC',
+    'group'   : 'QCD',
+    'subsample' : {
+      '0' : 'QCD_Pt_470-600_MuEnriched_v1_Sep19-2017',
+    },
+    'xs':{
+      '0' : 79.02553776,
+    }
+  },
+  'QCD_Pt-600to800_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8':{
+    'type'    : 'MC',
+    'group'   : 'QCD',
+    'subsample' : {
+      '0' : 'QCD_Pt_600-800_MuEnriched_v1_Sep19-2017',
+      '1' : 'QCD_Pt_600-800_MuEnriched_v2_Sep19-2017',
+    },
+    'xs':{
+      '0' : 25.09505908,
+      '1' : 25.09505908,
+    }
+  },
+  'QCD_Pt-800to1000_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8':{
+    'type'    : 'MC',
+    'group'   : 'QCD',
+    'subsample' : {
+      '0' : 'QCD_Pt_800-1000_MuEnriched_v1_Sep19-2017',
+      '1' : 'QCD_Pt_800-1000_MuEnriched_v2_Sep19-2017',
+    },
+    'xs':{
+      '0' : 4.707368272,
+      '1' : 4.707368272,
+    }
+  },
+  'QCD_Pt-1000toInf_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8':{
+    'type'    : 'MC',
+    'group'   : 'QCD',
+    'subsample' : {
+      '0' : 'QCD_Pt_1000-Inf_MuEnriched_v1_Sep19-2017',
+    },
+    'xs':{
+      '0' : 1.621316920,
+    }
+  },
+
+
 }
 
-
-
 # # 2016 Campaign
+
 # info = {  
 #   # ------------------------------------ Data ------------------------------------------
 #   'JetHT':{
