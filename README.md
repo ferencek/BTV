@@ -18,6 +18,6 @@ scram b -j8
 
 cd RecoBTag/BTagValidation  
 
-git clone https://github.com/BenjaminMesic/BTV.git  
+git clone https://github.com/rsyarif/BTV.git  
 cd BTV  
 python main.py  
