@@ -143,7 +143,7 @@ class MergeTool(object):
             
             # Setup sample normalization
             if self.samples_info[_s]['type'] == 'MC':
-              _scale = float(self.samples_info[_s]['xs'][_n]*self.luminosity/_n_events_all)
+              _scale = float(self.samples_info[_s]['xs'][_ss]*self.luminosity/_n_events_all)
             else:
               _scale = 1.
 
