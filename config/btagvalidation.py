@@ -12,7 +12,7 @@ parameters = {
   'outFilename'               : string(''),             # Output file name
   'maxEvents'                 : -1,
   'reportEvery'               : 1000,                   # Report every N events (default is N=1000)
-  'DEBUG'                     : True,                   # Display debugging statements
+  'DEBUG'                     : False,                   # Display debugging statements
   'DEBUGlevel'                : 0,                      # Debugging statements level
   'triggerSelection'          : string( ','.join(['HLT_BTagMu_AK8Jet300_Mu5' + "'", "'" + 'HLT_BTagMu_Jet300_Mu5'])), # Trigger selection
   'useJetProbaTree'           : True,                   # Use jet probability tree
@@ -53,7 +53,7 @@ parameters = {
   'FilePUDistData'            : string( os.path.join( paths.main, 'aux', 'RunII2016Rereco_25ns_PUXsec69000nb.root')),   # File for data/MC weights for PU reweight (official)
   'Hist_PUDistData'           : string('pileup'),
   'DoPUReweightingNPV'        : False,                  # Do pileup reweighting
-  'doFatJetPtReweighting'     : True,                   # Do fat jet pt reweighting
+  'doFatJetPtReweighting'     : False,                   # Do fat jet pt reweighting
   'doNtracksReweighting'      : False,                  # Do ntracks reweightin
   'doBFrag'                   : False,                  # Do b fragmentation reweighting
   'doBFragUp'                 : False,                  # Do b fragmentation reweighting up
