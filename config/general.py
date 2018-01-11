@@ -2,46 +2,18 @@
 # campaign name, needed for list of samples definition, etc...
 
 # campaigns       = ['caseA', 'caseB','caseC','caseD']
-# campaigns       = [	
-# 					'AK8Jet300andAK4DiJet70_caseD',
-# 					'AK4Jet300andAK4DiJet70_caseD',
-# 					'AK4DiJet170andAK4DiJet70_caseD',
-# 					'AK8DiJet170andAK4DiJet70_caseD',
-# 					'AK4DiJet70_caseD',
-# 					'AK8Jet300andAK4DiJet110_caseD',
-# 					'AK4Jet300andAK4DiJet110_caseD',
-# 					'AK4DiJet170andAK4DiJet110_caseD',
-# 					'AK8DiJet170andAK4DiJet110_caseD',
-# 					'AK4DiJet110_caseD',
-# 					]
-# campaigns       = [	
-# 					'AK8Jet300andAK4DiJet110_Run2017CD',
-# 					'AK4Jet300andAK4DiJet110_Run2017CD',
-# 					'AK4DiJet170andAK4DiJet110_Run2017CD',
-# 					'AK8DiJet170andAK4DiJet110_Run2017CD',
-# 					'AK4DiJet110_Run2017CD',
-# 					]
-# campaigns       = [	
-# 					'AK8Jet300orAK4Jet300_andAK4DiJet110_Run2017CD',
-# 					]
-# campaigns       = [	
-# 					'Run2017CD_QCDMuEnriched_Pt350',
-# 					'Run2017Case4_QCDMuEnriched_Pt350',
-# 					'Run2017CD_QCDMuEnriched_Pt250',
-# 					'Run2017Case4_QCDMuEnriched_Pt250',
-# 					]
 campaigns       = [	
-# 					'AK8Jet300orAK4Jet300_Run2017CD',
-# 					'AK4DiJet110_Run2017CD',
-					'AK4DiJet170_Run2017CD',
+					'Run2017BCD_QCDMuEnriched_Pt350',
+					'Run2017BCD_QCDMuEnriched_Pt250',
 					]
 # campaigns       = [	
-# 					'Run2017CD_QCDMuEnriched_Pt350_singleMuTag',
+# 					'Run2017BCD_QCDincl_Pt350',
+# 					'Run2017BCD_QCDincl_Pt250',
 # 					]
 
 
 # Choose True if you want to overwrite already existing files/results
-force_all       = True
+force_all       = False
 # If True all files are copied locally and used, else use files from original location
 work_locally    = False
 
@@ -51,8 +23,9 @@ luminosity      = 1
 # Name of the analyzer
 analyzer_module = 'btagval'
 # Groups for histogram merging
-# groups          = ['DATA', 'QCD']
-groups          = ['DATA']
+# groups          = ['DATA', 'QCDincl']
+groups          = ['DATA', 'QCDMu+']
+# groups          = ['DATA']
 
 # -------- Batch options -----------
 # Choose if you want to use batch: False, condor, lxbatch
@@ -75,18 +48,21 @@ batch_templates = {
 # -------- Browse/copy options -----------
 remote_locations = {
   'storage_element' : {
-    'eos' : '/eoscms.cern.ch/', # Used for gfal
+    'eos' : '', # added by rizki Jan10-2018
+    #'eos' : '/eoscms.cern.ch/', # Used for gfal
     # 'eos' : '/srm-eoscms.cern.ch:8443/srm/v2/server?SFN=', # Used for lcg
   },
   'path'   : {
-    'eos' : 'store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_2_X',   # Used for gfal
-    # 'eos' : 'eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_2_X', # Used for lcg
+    'eos' : '/eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X',   # added by rizki Jan10-2018
+    #'eos' : 'store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X',   # Used for gfal
+    # 'eos' : 'eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X', # Used for lcg
   },
   'path_ex': {
-    'eos' : '/eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_2_X',   
+    'eos' : '/eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X',   
   },
   'protocol': {
-    'eos'  : 'root:/', # Used for gfal
+    'eos'  : '', # added by rizki Jan10-2018
+    #'eos'  : 'root:/', # Used for gfal
     # 'eos'  : 'srm:/', # Used for lcg
   },
 }

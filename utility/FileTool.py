@@ -37,9 +37,12 @@ class FileTool(object):
     ''' Wrapper for ls, which is used for browsing remote directories.'''
 
     utility.Print('python_info', '\nCalled wrapper_gfal_ls function.')
-
-    _command = ['gfal-ls', '-l'] #,'-Hl']
+    
+    _command = ['ls', '-l']
     _command.append(protocol + location)
+
+    #_command = ['gfal-ls', '-l'] #,'-Hl'] #commented by rizki
+    #_command.append(protocol + location) #commented by rizki
 
     # _command = ['lcg-ls -b -D -Hl srmv2'] #,'-Hl']
     # _command.append('"' + protocol + location + '"')
