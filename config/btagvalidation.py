@@ -50,7 +50,7 @@ parameters = {
   'MuonJetPtRatio'            : 0.5,                    # pT(muon)/pT(Jet) for Muon Tagging
   'DiMuonJetPtRatio'          : 0.6,                    # pT(muon1+muon2)/pT(Jet) for Double Muon Tagging
   'doPUReweightingOfficial'   : True,                   # Do pileup reweighting
-  'FilePUDistData'            : string( os.path.join( paths.main, 'aux', 'RunII2016Rereco_25ns_PUXsec69000nb.root')),   # File for data/MC weights for PU reweight (official)
+  'FilePUDistData'            : string( os.path.join( paths.main, 'aux', 'RunII2017Rereco_25ns_PUXsec69200nb.root')),   # File for data/MC weights for PU reweight (official)
   'Hist_PUDistData'           : string('pileup'),
   'DoPUReweightingNPV'        : False,                  # Do pileup reweighting
   'doFatJetPtReweighting'     : False,                   # Do fat jet pt reweighting
