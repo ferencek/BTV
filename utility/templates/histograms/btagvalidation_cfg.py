@@ -3,10 +3,11 @@ from RecoBTag.PerformanceMeasurements.bTagAnalyzerCommon_cff import *
 
 process  = cms.Process("BTagVal")
 
-process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.cout = cms.untracked.PSet(
-    threshold = cms.untracked.string('INFO'),
-    )
+# uncomment below to turn on MSG
+# process.load("FWCore.MessageService.MessageLogger_cfi")
+# process.MessageLogger.cout = cms.untracked.PSet(
+#     threshold = cms.untracked.string('INFO'),
+#     )
 
 process.maxEvents = cms.untracked.PSet( 
     input = cms.untracked.int32(1) # Keep as such
@@ -67,10 +68,6 @@ process.btagval = cms.EDAnalyzer('BTagValidation',
     Hist_PVWt                       = cms.string(<HistPVWt>),
     File_PUDistMC                   = cms.string(<FilePUDistMC>), 
     Hist_PUDistMC                   = cms.string(<HistPUDistMC>),
-    # File_PUDistData                = cms.string('/afs/cern.ch/user/r/rsyarif/workHere/HbbTagVal/July27-2016_SFMeasurement/CMSSW_8_0_12/src/RecoBTag/BTagValidation/test/RunII2016_25ns_PUSpring16V2_Xsec69200nb.root'), #some lumi sections were missing?
-    # File_PUDistData                = cms.string('/afs/cern.ch/user/r/rsyarif/workHere/HbbTagVal/July27-2016_SFMeasurement/CMSSW_8_0_12/src/RecoBTag/BTagValidation/test/RunII2016_25ns_PUSpring16V1_Xsec69200nb.root'), #devdatta's file
-    # File_PUDistData                = cms.string('/afs/cern.ch/user/r/rsyarif/workHere/HbbTagVal/July27-2016_SFMeasurement/CMSSW_8_0_12/src/RecoBTag/BTagValidation/test/RunII2016_25ns_PUSpring16V3_Xsec69200nb.root'), #reproduce again, the missing lumis are not missing anymore?
-    # File_PUDistData                = cms.string('/afs/cern.ch/user/r/rsyarif/workHere/HbbTagVal/July27-2016_SFMeasurement/CMSSW_8_0_12/src/RecoBTag/BTagValidation/test/RunII2016_25ns_PUSpring16V1_Xsec62000nb.root'), #use different minbias xsec.
     File_PUDistData                 = cms.string(<FilePUDistData>),
     Hist_PUDistData                 = cms.string(<Hist_PUDistData>), 
     File_FatJetPtWt                 = cms.string(<FileFatJetPtWt>),
