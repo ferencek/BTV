@@ -50,7 +50,7 @@ parameters = {
   'MuonJetPtRatio'            : 0.5,                    # pT(muon)/pT(Jet) for Muon Tagging
   'DiMuonJetPtRatio'          : 0.6,                    # pT(muon1+muon2)/pT(Jet) for Double Muon Tagging
   'doPUReweightingOfficial'   : True,                   # Do pileup reweighting
-  'FilePUDistData'            : string( os.path.join( paths.main, 'aux', 'RunII2017Rereco_25ns_PUXsec69200nb.root')),   # File for data/MC weights for PU reweight (official)
+  'FilePUDistData'            : string( os.path.join( paths.main, 'aux', 'RunII2017Rereco_RunBCDEF_v1v2topUp_25ns_PUXsec69200nb_Feb8-2018.root')),   # File for data/MC weights for PU reweight (official)
   'Hist_PUDistData'           : string('pileup'),
   'DoPUReweightingNPV'        : False,                  # Do pileup reweighting
   'doFatJetPtReweighting'     : False,                   # Do fat jet pt reweighting
@@ -101,7 +101,7 @@ parameters = {
   'FileBFrag'                 : string( os.path.join( paths.main, 'aux', 'PtRelFall12')), # File path for doBFrag systematics
   'FilePVWt'                  : string(''),
   'HistPVWt'                  : string(''),
-  'FilePUDistMC'              : string( os.path.join( paths.main, 'aux', 'PUDistMC_Summer2016_25ns_Moriond17MC_PoissonOOTPU.root')),
+  'FilePUDistMC'              : string( os.path.join( paths.main, 'aux', 'PUDistMC_2017_25ns_WinterMC_PUScenarioV1_PoissonOOTPU.root')),
   'HistPUDistMC'              : string('pileup'),
   'FileSubJetPtBalanceWt'     : string('subjetptbalance_Hbb_QCDbb_pt425_weight.root'),
   'HistSubJetPtBalanceWt'     : string('subjetptbalanceweight_mc_data'),
@@ -110,7 +110,10 @@ parameters = {
   'FileJetNTracksWt'          : string('jetNTracks_Hbb_QCDbb_pt425_weight.root'),
   'jetNTracksweight_mc_data'  : string('jetNTracksweight_mc_data'),
   'triggerLogicIsOR'          : True,
-  'produceDoubleBSFtemplates' : False,
+  'produceDoubleBSFtemplates' : False,  #use JP
+  'produceDoubleBSFtemplatesV2': False, #use SVmass
+  'produceDoubleBSFtemplates_JPhasSV': False, #use JPhasSV
+  'produceDoubleBSFtemplates_JPnoSV': False, #use JPnoSV
   'useRunRange'               : False,
   'runRangeMin'               : 0,
   'runRangeMax'               : 999999
