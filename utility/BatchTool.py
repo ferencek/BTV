@@ -60,6 +60,7 @@ class BatchTool(object):
       sp.call(' '.join(_command), shell=True)
     
     elif self.batch == 'lxbatch':
-      _command  = ['bsub', '-q', self.queue, '-J', self.arguments['<path_batch_file_wo_ext>'], '<', _sh]
+      _stdout = self.arguments['<path_batch_file_wo_ext>'] + '.stdout'
+      _command  = ['bsub', '-q', self.queue, '-o', _stdout, '-J', self.arguments['<path_batch_file_wo_ext>'], '<', _sh]
       utility.Print('python_info','{0}'.format(' '.join(_command)))
       sp.call( ' '.join(_command), shell=True)

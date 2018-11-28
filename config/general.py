@@ -48,12 +48,14 @@ batch_templates = {
 # -------- Browse/copy options -----------
 remote_locations = {
   'storage_element' : {
-    'eos' : '', # added by rizki Jan10-2018
+    'eos' : 'lorienmaster.irb.hr:8444/srm/managerv2\?SFN=',
+    #'eos' : '', # added by rizki Jan10-2018
     #'eos' : '/eoscms.cern.ch/', # Used for gfal
     # 'eos' : '/srm-eoscms.cern.ch:8443/srm/v2/server?SFN=', # Used for lcg
   },
   'path'   : {
-    'eos' : '/eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X',   # added by rizki Jan10-2018
+    'eos' : 'STORE/se/cms/store/user/mrogulji/BoostedBTag/BTagNTuples/2017/9_4_9'
+    #'eos' : '/eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X',   # added by rizki Jan10-2018
     #'eos' : 'store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X',   # Used for gfal
     # 'eos' : 'eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X', # Used for lcg
   },
@@ -61,7 +63,8 @@ remote_locations = {
     'eos' : '/eos/cms/store/group/phys_btag/BoostedBTag/BTagNTuples/2017/9_4_X',   
   },
   'protocol': {
-    'eos'  : '', # added by rizki Jan10-2018
+    'eos'  : 'srm://',
+    #'eos'  : '', # added by rizki Jan10-2018
     #'eos'  : 'root:/', # Used for gfal
     # 'eos'  : 'srm:/', # Used for lcg
   },

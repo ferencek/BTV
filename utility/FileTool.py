@@ -20,6 +20,7 @@ class FileTool(object):
 
     # ------ Batch options -------
     self.batch_type               = configuration.general.batch_type
+    self.queue_lxbatch            = configuration.general.queue_lxbatch
     self.number_of_jobs           = configuration.general.number_of_jobs
     self.send_jobs                = configuration.general.send_jobs
     self.batch_templates          = configuration.general.batch_templates
@@ -38,11 +39,11 @@ class FileTool(object):
 
     utility.Print('python_info', '\nCalled wrapper_gfal_ls function.')
     
-    _command = ['ls', '-l']
-    _command.append(protocol + location)
+    #_command = ['ls', '-l']
+    #_command.append(protocol + location)
 
-    #_command = ['gfal-ls', '-l'] #,'-Hl'] #commented by rizki
-    #_command.append(protocol + location) #commented by rizki
+    _command = ['gfal-ls', '-l'] #,'-Hl'] #commented by rizki
+    _command.append(protocol + location) #commented by rizki
 
     # _command = ['lcg-ls -b -D -Hl srmv2'] #,'-Hl']
     # _command.append('"' + protocol + location + '"')
@@ -297,7 +298,7 @@ class FileTool(object):
             }
 
             # Create batch tool instance
-            _batch = utility.BatchTool( _path_batch_templates_copy, _batch_templates_copy, _batch_arguments, self.batch_type)
+            _batch = utility.BatchTool( _path_batch_templates_copy, _batch_templates_copy, _batch_arguments, self.batch_type, self.queue_lxbatch)
             # Make scripts first
             _batch.make_scripts()
             # Send jobs
@@ -355,7 +356,7 @@ class FileTool(object):
               }
 
               # Create batch tool instance
-              _batch = utility.BatchTool( _path_batch_templates_check, _batch_templates_check, _batch_arguments, self.batch_type)
+              _batch = utility.BatchTool( _path_batch_templates_check, _batch_templates_check, _batch_arguments, self.batch_type, self.queue_lxbatch)
               # Make scripts first
               _batch.make_scripts()
               # Send job

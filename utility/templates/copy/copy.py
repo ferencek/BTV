@@ -10,7 +10,8 @@ def copy(destination, source):
 
   _command = ['gfal-copy', '--force']
   _command.append('<protocol>' + source)
-  _command.append('file:///' + destination)
+  #_command.append('file:///' + destination)
+  _command.append('srm://srm-eoscms.cern.ch/' + destination)
 
   sp.call(_command)
 

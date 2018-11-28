@@ -11,6 +11,8 @@ info = {
       '0' : 'BTagMu_Run2017B-17Nov2017-v1_MINIAOD',
       '1' : 'BTagMu_Run2017C-17Nov2017-v1_MINIAOD',
       '2' : 'BTagMu_Run2017D-17Nov2017-v1_MINIAOD',
+      '3' : 'BTagMu_Run2017E-17Nov2017-v1_MINIAOD',
+      '4' : 'BTagMu_Run2017F-17Nov2017-v1_MINIAOD',
     }
   },
 
@@ -50,7 +52,7 @@ info = {
     'type'    : 'MC',
     'group'   : 'QCDMu+',
     'subsample' : {
-      '0' : '',
+      '0' : 'QCD_Pt_600to800_MuEnriched_v1_Jan3-2018',
     },
     'xs':{
       '0' : 25.09505908,#xs:187.109, filter eff:0.13412 #McM
@@ -60,7 +62,7 @@ info = {
     'type'    : 'MC',
     'group'   : 'QCDMu+',
     'subsample' : {
-      '0' : '',
+      '0' : 'QCD_Pt_800to1000_MuEnriched_v1_Jan3-2018',
     },
     'xs':{
       '0' : 4.707368272,#xs:, filter eff: #McM
@@ -78,106 +80,106 @@ info = {
   },
 
 
-  'QCD_Pt_170to300_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_170to300_v1_Jan3-2018',
-    },
-    'xs':{
-      '0' : 19204300,#xs:19204300 #McM
-    }
-  },
-  'QCD_Pt_300to470_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',   
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_300to470_v1_Jan3-2018',
-    },
-    'xs':{
-      '0' : 7823,#xs:7823 #McM
-    },
-  },
-  'QCD_Pt_470to600_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_470to600_v1_Jan3-2018_v2',
-    },
-    'xs':{
-      '0' : 648.2,#xs:648.2 #McM
-    }
-  },
-  'QCD_Pt_600to800_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_600to800_v1_Jan3-2018',
-    },
-    'xs':{
-      '0' : 186.9,#xs:186.9 #McM
-    }
-  },
-  'QCD_Pt_800to1000_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_800to1000_v2_Jan3-2018',
-    },
-    'xs':{
-      '0' : 32.293,#xs:32.293 #McM
-    }
-  },
-  'QCD_Pt_1000to1400_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_1000to1400_v1_Jan3-2018',
-    },
-    'xs':{
-      '0' : 9.4183,#xs:9.4183 #McM
-    }
-  },
-  'QCD_Pt_1400to1800_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_1400to1800_v1_Jan3-2018',
-    },
-    'xs':{
-      '0' : 0.84265,#xs:0.84265 #McM
-    }
-  },
-  'QCD_Pt_1800to2400_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_1800to2400_v1_Jan3-2018',
-    },
-    'xs':{
-      '0' : 0.114943,#xs:0.114943 #McM
-    }
-  },
-  'QCD_Pt_2400to3200_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_2400to3200_v2_Jan3-2018',
-    },
-    'xs':{
-      '0' : 0.00682981,#xs:0.00682981 #McM
-    }
-  },
-  'QCD_Pt_3200toInf_TuneCP5_13TeV_pythia8':{
-    'type'    : 'MC',
-    'group'   : 'QCDincl',
-    'subsample' : {
-      '0' : 'QCD_Pt_3200toInf_v1_Jan3-2018',
-    },
-    'xs':{
-      '0' : 0.000165445,#xs:0.000165445 #McM
-    }
-  },
+  #'QCD_Pt_170to300_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_170to300_v1_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 19204300,#xs:19204300 #McM
+    #}
+  #},
+  #'QCD_Pt_300to470_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',   
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_300to470_v1_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 7823,#xs:7823 #McM
+    #},
+  #},
+  #'QCD_Pt_470to600_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_470to600_v1_Jan3-2018_v2',
+    #},
+    #'xs':{
+      #'0' : 648.2,#xs:648.2 #McM
+    #}
+  #},
+  #'QCD_Pt_600to800_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_600to800_v1_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 186.9,#xs:186.9 #McM
+    #}
+  #},
+  #'QCD_Pt_800to1000_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_800to1000_v2_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 32.293,#xs:32.293 #McM
+    #}
+  #},
+  #'QCD_Pt_1000to1400_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_1000to1400_v1_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 9.4183,#xs:9.4183 #McM
+    #}
+  #},
+  #'QCD_Pt_1400to1800_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_1400to1800_v1_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 0.84265,#xs:0.84265 #McM
+    #}
+  #},
+  #'QCD_Pt_1800to2400_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_1800to2400_v1_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 0.114943,#xs:0.114943 #McM
+    #}
+  #},
+  #'QCD_Pt_2400to3200_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_2400to3200_v2_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 0.00682981,#xs:0.00682981 #McM
+    #}
+  #},
+  #'QCD_Pt_3200toInf_TuneCP5_13TeV_pythia8':{
+    #'type'    : 'MC',
+    #'group'   : 'QCDincl',
+    #'subsample' : {
+      #'0' : 'QCD_Pt_3200toInf_v1_Jan3-2018',
+    #},
+    #'xs':{
+      #'0' : 0.000165445,#xs:0.000165445 #McM
+    #}
+  #},
 
 
 }
